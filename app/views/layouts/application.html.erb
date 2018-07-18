@@ -4,11 +4,31 @@
     <title>Artisan</title>
     <%= csrf_meta_tags %>
 
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Merienda|Poppins" rel="stylesheet">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+    <div class="container">
+      <% if notice %>
+        <div class="alert alert-info alert-dismissible fade show mt-3 col-md-6 col-lg-4 offset-md-3 offset-lg-4" role="alert">
+          <p class="notice m-0"><%= notice %></p>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      <% end %>
+      <% if alert %>
+        <div class="alert alert-danger alert-dismissible fade show mt-3 col-md-6 col-lg-4 offset-md-3 offset-lg-4" role="alert">
+          <p class="m-0"><%= alert %></p>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      <% end %>
+    </div>
     <%= yield %>
   </body>
 </html>

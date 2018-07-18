@@ -1,0 +1,16 @@
+<div class="container-fluid mt-5">
+  <div class="container-fluid text-right">
+    <div class="dropdown show">
+      <button class="btn btn-secondary btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Welcome <%= current_user.username %>
+      </button>
+
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <%# <div class="dropdown-divider"></div> %>
+        <% if user_signed_in? %>
+          <%= link_to('Logout', destroy_user_session_path, method: :delete, class: 'dropdown-item') %>        
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

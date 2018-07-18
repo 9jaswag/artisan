@@ -1,0 +1,24 @@
+<div class="container-fluid">
+  <div class="container text-center mt-5 mb-4">
+    <h3 class="logo">ARTISAN</h3>
+  </div>
+  <div class="container col-md-6 col-lg-4 p-5 card">
+    <h4 class="mb-1">Forgot your password?</h4>
+    <small class="mb-4">Enter your email below and we'll send you a reset link.</small>
+
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+      <%= devise_error_messages! %>
+
+      <div class="form-group">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "off", class: 'form-control form-control-sm', required: :true %>
+      </div>
+
+      <div class="actions my-3">
+        <%= f.submit "Send me reset password instructions", class: 'btn btn-primary btn-sm' %>
+      </div>
+    <% end %>
+
+    <%= render "devise/shared/links" %>
+  </div>
+</div>
