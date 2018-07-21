@@ -1,9 +1,90 @@
 <div class="container-fluid mt-5">
   <% @services.each do |service| %>
     <div class="container">
-      <h5><%= service %></h5>
-      <%= form_with(url: create_quote_path, format: :json, id: 'new_quote') do |form| %>
-      <% end %>
+      <h5 class="mb-3"><%= service.split('-').map(&:capitalize).join(' ') %></h5>  
+      <form class="mb-3 <%= 'mb-5' if service == 'general-cleaning' %>" id="<%= service %>">
+        <div class="form-row">
+          <div class="form-group col-12 col-md-4">
+            <label class="form-check-label" for="people_per_job">How many workers are needed?</label>
+            <input type="number" id="people_per_job" class="form-control form-control-sm" />
+          </div>
+          <div class="form-group col-12 col-md-4">
+            <label class="form-check-label" for="hours_for_job">Hours for job</label>
+            <input type="number" id="hours_for_job" class="form-control form-control-sm" />
+          </div>
+          <div class="form-group col-12 col-md-4">
+            <label class="form-check-label" for="price_per_hour">Price per hour</label>
+            <input type="number" id="price_per_hour" class="form-control form-control-sm" />
+          </div>
+          <div class="form-group col-12 col-md-4">
+            <label class="form-check-label" for="mensuration">Any mensuration?</label>
+            <input type="number" id="mensuration" class="form-control form-control-sm" />
+            <small id="mensurationHelp" class="form-text text-muted">e.g. Window measurement.</small>
+          </div>
+          <div class="form-group col-12 col-md-4">
+            <label class="form-check-label" for="mensuration">Cost per measurement</label>
+            <input type="number" id="cost_per_measurement" class="form-control form-control-sm" />
+            <small id="cost_per_measurementHelp" class="form-text text-muted">Enter the amount per measurement. e.g. $4 per square feet</small>
+          </div>
+          <div class="form-group col-12 col-md-4">
+            <label class="form-check-label" for="discount">Any discount?</label>
+            <input type="number" id="discount" class="form-control form-control-sm" />
+            <small id="discountHelp" class="form-text text-muted">e.g. 5%.</small>
+          </div>
+        </div>
+
+        <% if params[:type] == 'contract' %>
+          <div class="form-row">
+            <div class="form-group col-12 col-md-6">
+              <label class="form-check-label" for="people_per_job">Monthly visits</label>
+              <input type="number" id="monthly_visit" class="form-control form-control-sm" />
+            </div>
+            <div class="form-group col-12 col-md-6">
+              <label class="form-check-label" for="price_per_visit">Price per visit</label>
+              <input type="number" id="price_per_visit" class="form-control form-control-sm" />
+            </div>
+            <div class="form-group col-12 col-md-6">
+              <label class="form-check-label" for="cost_per_visit">Cost per month</label>
+              <input type="number" id="cost_per_visit" class="form-control form-control-sm" value="50" readonly/>
+            </div>
+            <div class="form-group col-12 col-md-6">
+              <label class="form-check-label" for="cost_per_visit">Number of months for contract</label>
+              <input type="number" id="contract_months" class="form-control form-control-sm"/>
+            </div>
+          </div>
+        <% end %>
+      </form>
     </div>
   <% end %>
+  <div class="container mb-5">
+    <div class="form-group pl-1">
+      <div class="form-row mb-1">
+        <div class="form-check mr-3">
+          <input class="form-check-input" type="checkbox" value="" id="first_time_charge">
+          <label class="form-check-label" for="first_time_charge">
+            First Time (+30)
+          </label>
+        </div>
+        <div class="form-check mr-3">
+          <input class="form-check-input" type="checkbox" value="" id="extra_clean_charge">
+          <label class="form-check-label" for="extra_clean_charge">
+            Extra Clean (+20)
+          </label>
+        </div>
+        <div class="form-check mr-3">
+          <input class="form-check-input" type="checkbox" value="" id="refrigerator_charge">
+          <label class="form-check-label" for="refrigerator_charge">
+            Refrigerator (+50)
+          </label>
+        </div>
+        <div class="form-check mr-3">
+          <input class="form-check-input" type="checkbox" value="" id="oven_clean_charge">
+          <label class="form-check-label" for="oven_clean_charge">
+            Oven Cleaning (+30)
+          </label>
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary" style="border: none">Save</button>
+  </div>
 </div>

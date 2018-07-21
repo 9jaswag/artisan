@@ -2,8 +2,8 @@ class QuotesController < ApplicationController
   before_action :check_quote_type, only: [:new]
 
   def new
-    @services = ['General Cleaning', 'Window Cleaning'] if params[:type] == 'custom'
-    @services = ['Contract Cleaning'] if params[:type] == 'contract'
+    @services = ['general-cleaning', 'window-cleaning'] if params[:type] == 'custom'
+    @services = ['contract-service'] if params[:type] == 'contract'
   end
 
   def create

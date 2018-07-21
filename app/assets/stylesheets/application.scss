@@ -51,7 +51,7 @@ input {
 
 .btn-primary {
   background-color: hsl(199, 18%, 40%);
-  border-color: none;
+  border-color: none !important;
   color: hsl(199, 26%, 90%);
   font-weight: bold;
   text-transform: uppercase;
