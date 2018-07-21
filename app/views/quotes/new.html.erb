@@ -1,2 +1,9 @@
-<h1>Quotes#new</h1>
-<p>Find me in app/views/quotes/new.html.erb</p>
+<div class="container-fluid mt-5">
+  <% @services.each do |service| %>
+    <div class="container">
+      <h5><%= service %></h5>
+      <%= form_with(url: create_quote_path, format: :json, id: 'new_quote') do |form| %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
