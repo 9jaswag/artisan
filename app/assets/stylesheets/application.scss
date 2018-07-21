@@ -23,17 +23,17 @@ body {
   fill: #546E7A !important;
  }
 
-.logo{
+.logo {
   font-family: 'Merienda', cursive;
 }
 
 label {
-  font-size: 0.9rem;
-  margin-bottom: 0.1rem;
+  font-size: .9rem;
+  margin-bottom: .1rem;
 }
 
 .card {
-  border: none;
+  border: 0;
   box-shadow: 0 15px 35px 0 rgba(42,51,83,.12), 0 5px 15px rgba(0,0,0,.06);
   transition: all .15s ease;
 
@@ -44,23 +44,23 @@ label {
 }
 
 input {
-  border: none !important;
   background-color: #e0e8ec !important;
+  border: none !important;
   color: #546E7A !important;
 }
 
 .btn-primary {
-  color: hsl(199, 26%, 90%);
   background-color: hsl(199, 18%, 40%);
   border-color: none;
-  text-transform: uppercase;
+  color: hsl(199, 26%, 90%);
   font-weight: bold;
+  text-transform: uppercase;
 
   &:hover,
   &:active {
-    color: hsl(199, 19%, 28%) !important;
     background-color: hsl(199, 27%, 82%) !important;
     border-color: transparent !important;
+    color: hsl(199, 19%, 28%) !important;
   }
 }
 
@@ -97,5 +97,36 @@ input {
     li {
       color: #E91E63;
     }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .mobile-margin-top {
+    margin-top: 2rem;
+  }
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.card-link {
+  color: inherit;
+  text-decoration: none;
+
+  &:active,
+  &:focus,
+  &:hover {
+    color: inherit;
+  }
+}
+
+.quote-btn {
+  padding: .4rem .7rem;
+}
+
+@media screen and (min-width: 768px) {
+  .quote-btn {
+    padding: 2rem;
   }
 }
