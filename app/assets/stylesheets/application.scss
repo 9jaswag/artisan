@@ -119,6 +119,16 @@ input {
   padding: .4rem .7rem;
 }
 
+.total-container {
+  align-items: center;
+  display: flex;
+
+  h1 {
+    font-size: 3rem;
+    padding-left: 1rem;
+  }
+}
+
 // styles for large displays
 @media screen and (min-width: 768px) {
   .quote-btn {
