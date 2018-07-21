@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  scope :quotes do
+    get "new/:type", to: 'quotes#new', as: 'new_quote'
+    post 'create', to: 'quotes#create', as: 'create_quote'
+  end
+
   get 'dashboard', to: 'dashboard#index'
 
   devise_for :users
