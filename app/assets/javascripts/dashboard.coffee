@@ -4,6 +4,7 @@
 $(document).on 'turbolinks:load', ->
   sumTotal = document.querySelector('.total');
   calculate = document.querySelector('.calculate');
+  saveButton = document.querySelector('.save-btn');
 
   currencyFormat = (number) ->
     new (Intl.NumberFormat)('en-US',
@@ -22,16 +23,23 @@ $(document).on 'turbolinks:load', ->
   windowCleaningTotal = (cm, cpm, ftc, ecc, ref, cab, ovc) ->
     extraCleaningCharge = extraCharge(ftc, ecc, ref, cab, ovc)
     (cm * cpm) + extraCleaningCharge
+  
+  showSaveButton = (total) ->
+    if total > 0
+      saveButton.classList.remove 'd-none'
+    else
+      saveButton.classList.add 'd-none'
+    return
 
 
   calculateCustomQuote = ->
-    generalCPPJ = document.querySelector('#general-cleaning_people_per_job').value;
-    generalCHFJ = document.querySelector('#general-cleaning_hours_for_job').value;
-    generalCPPH = document.querySelector('#general-cleaning_price_per_hour').value;
+    generalCPPJ = document.querySelector('#people_per_job').value;
+    generalCHFJ = document.querySelector('#hours_for_job').value;
+    generalCPPH = document.querySelector('#price_per_hour').value;
 
-    windowCM = document.querySelector('#window-cleaning_mensuration').value;
-    windowCCPM = document.querySelector('#window-cleaning_cost_per_measurement').value;
-    windowCD = document.querySelector('#window-cleaning_discount').value;
+    windowCM = document.querySelector('#mensuration').value;
+    windowCCPM = document.querySelector('#cost_per_measurement').value;
+    windowCD = document.querySelector('#discount').value;
 
     firstTimeCharge = document.querySelector('#first_time_charge');
     extraCleanCharge = document.querySelector('#extra_clean_charge');
@@ -43,6 +51,7 @@ $(document).on 'turbolinks:load', ->
     subTotal += windowCleaningTotal(windowCM, windowCCPM, firstTimeCharge, extraCleanCharge, refrigeratorCharge, cabinetsCharge, ovenCleanCharge)
     discount = (windowCD/100) * subTotal
     total = subTotal - discount
+    showSaveButton(total)
 
     sumTotal.innerHTML = currencyFormat(total)
     return
@@ -57,16 +66,35 @@ $(document).on 'turbolinks:load', ->
     document.querySelector('#cost_per_month').value = contractMV * contractPPV
 
     total = (Number(contractMV) * Number(contractPPV)) * Number(contractCM)
+    showSaveButton(total)
 
     sumTotal.innerHTML = currencyFormat(total)
     return
 
+  saveQuote = ->
+    data = {}
+    forms = document.querySelectorAll('form');
+    forms.forEach (form) ->
+      data[form.id] = {}
+      for input in form.elements
+        if input.type == 'checkbox'
+          if input.checked
+            data[form.id][input.id] = input.value
+        if input.type == 'number'
+          data[form.id][input.id] = input.value
+      return
+    console.log data
+
   if document.location.pathname.endsWith('custom')
     calculate.onclick = ->
       calculateCustomQuote()
+    saveButton.onclick = ->
+      saveQuote()
 
   if document.location.pathname.endsWith('contract')
     calculate.onclick = ->
       calculateContractQuote()
+    saveButton.onclick = ->
+      saveQuote()
 
   return
