@@ -7,15 +7,15 @@
           <div class="form-row">
             <div class="form-group col-12 col-md-4">
               <label class="form-check-label" for="people_per_job">How many workers are needed?</label>
-              <input type="number" min="0" value=0 id="<%= service %>_people_per_job" class="form-control form-control-sm" />
+              <input type="number" min="0" id="<%= service %>_people_per_job" class="form-control form-control-sm" />
             </div>
             <div class="form-group col-12 col-md-4">
               <label class="form-check-label" for="hours_for_job">Hours for job</label>
-              <input type="number" min="0" value=0 id="<%= service %>_hours_for_job" class="form-control form-control-sm" />
+              <input type="number" min="0" id="<%= service %>_hours_for_job" class="form-control form-control-sm" />
             </div>
             <div class="form-group col-12 col-md-4">
               <label class="form-check-label" for="price_per_hour">Price per hour</label>
-              <input type="number" min="0" value=0 id="<%= service %>_price_per_hour" class="form-control form-control-sm" />
+              <input type="number" min="0" id="<%= service %>_price_per_hour" class="form-control form-control-sm" />
             </div>
           </div>
         <% end %>
@@ -24,17 +24,17 @@
           <div class="form-row mb-1">
             <div class="form-group col-12 col-md-4">
             <label class="form-check-label" for="mensuration">Any mensuration?</label>
-            <input type="number" min="0" value=0 id="<%= service %>_mensuration" class="form-control form-control-sm" />
+            <input type="number" min="0" id="<%= service %>_mensuration" class="form-control form-control-sm" />
             <small id="mensurationHelp" class="form-text text-muted">e.g. Window measurement.</small>
           </div>
           <div class="form-group col-12 col-md-4">
             <label class="form-check-label" for="mensuration">Cost per measurement</label>
-            <input type="number" min="0" value=0 id="<%= service %>_cost_per_measurement" class="form-control form-control-sm" />
+            <input type="number" min="0" id="<%= service %>_cost_per_measurement" class="form-control form-control-sm" />
             <small id="cost_per_measurementHelp" class="form-text text-muted">Enter the amount per measurement. e.g. $4 per square feet</small>
           </div>
           <div class="form-group col-12 col-md-4">
             <label class="form-check-label" for="discount">Any discount?</label>
-            <input type="number" min="0" value=0 id="<%= service %>_discount" class="form-control form-control-sm" />
+            <input type="number" min="0" id="<%= service %>_discount" class="form-control form-control-sm" />
             <small id="discountHelp" class="form-text text-muted">e.g. 5%.</small>
           </div>
           <div class="form-row mb-1 ml-1">
@@ -69,37 +69,36 @@
               </label>
             </div>
           </div>
-        </div>
         <% end %>
 
         <% if service == 'contract-service' %>
           <div class="form-row">
             <div class="form-group col-12 col-md-6">
               <label class="form-check-label" for="people_per_job">Monthly visits</label>
-              <input type="number" min="0" value=0 id="monthly_visit" class="form-control form-control-sm" />
+              <input type="number" min="0" id="monthly_visit" class="form-control form-control-sm" />
             </div>
             <div class="form-group col-12 col-md-6">
               <label class="form-check-label" for="price_per_visit">Price per visit</label>
-              <input type="number" min="0" value=0 id="price_per_visit" class="form-control form-control-sm" />
+              <input type="number" min="0" id="price_per_visit" class="form-control form-control-sm" />
+            </div> 
+            <div class="form-group col-12 col-md-6">
+              <label class="form-check-label" for="cost_per_visit">Number of months for contract</label>
+              <input type="number" min="0" id="contract_months" class="form-control form-control-sm"/>
             </div>
             <div class="form-group col-12 col-md-6">
               <label class="form-check-label" for="cost_per_visit">Cost per month</label>
-              <input type="number" min="0" id="cost_per_month" class="form-control form-control-sm" value="" readonly/>
-            </div>
-            <div class="form-group col-12 col-md-6">
-              <label class="form-check-label" for="cost_per_visit">Number of months for contract</label>
-              <input type="number" min="0" value=0 id="contract_months" class="form-control form-control-sm"/>
+              <input type="number" id="cost_per_month" class="form-control form-control-sm" readonly disabled/>
             </div>
           </div>
         <% end %>
       </form>
     </div>
   <% end %>
-  <div class="container mb-5">
+  <div class="container mb-5 pl-0">
     <div class="total-container">
       <button type="submit" class="btn btn-primary calculate mr-2" style="border: none">Calculate</button>
       <h4 class="d-inline-block">Total:</h4>
-      <h1 class="d-inline-block"><small><sup>$</sup></small><span class="total">0</span></h1>
+      <h1 class="d-inline-block"><span class="total">0</span></h1>
     </div>
     <button type="submit" class="btn btn-primary" style="border: none">Save</button>
     <a href="/dashboard" class="btn btn-light" style="border: none">Back to dashboard</a>

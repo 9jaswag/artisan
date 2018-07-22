@@ -2,15 +2,16 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 $(document).on 'turbolinks:load', ->
-  # select form inputs
   sumTotal = document.querySelector('.total');
   calculate = document.querySelector('.calculate');
 
+  currencyFormat = (number) ->
+    new (Intl.NumberFormat)('en-US',
+      style: 'currency'
+      currency: 'USD').format number
+
   isChecked = (element) ->
-    if element.checked
-      Number(element.value)
-    else
-      0
+    if element.checked then Number(element.value) else 0
 
   generalCleaningTotal = (pph, pfj, hfj) ->
     pph * pfj * hfj
@@ -43,11 +44,8 @@ $(document).on 'turbolinks:load', ->
     discount = (windowCD/100) * subTotal
     total = subTotal - discount
 
-    sumTotal.innerHTML = total
+    sumTotal.innerHTML = currencyFormat(total)
     return
-
-
-  # if document.location.pathname.endsWith('contract')
 
   calculateContractQuote = ->
     contractMV = document.querySelector('#monthly_visit').value;
@@ -58,12 +56,17 @@ $(document).on 'turbolinks:load', ->
     # calculate contract cost per month
     document.querySelector('#cost_per_month').value = contractMV * contractPPV
 
+    total = (Number(contractMV) * Number(contractPPV)) * Number(contractCM)
+
+    sumTotal.innerHTML = currencyFormat(total)
     return
 
-  if document.location.pathname.includes('quotes')
+  if document.location.pathname.endsWith('custom')
     calculate.onclick = ->
-      # calculateContractQuote()
       calculateCustomQuote()
 
+  if document.location.pathname.endsWith('contract')
+    calculate.onclick = ->
+      calculateContractQuote()
 
   return
