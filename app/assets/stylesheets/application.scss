@@ -131,6 +131,11 @@ input {
 
 input[type=checkbox] {
   margin-bottom: 1rem;
+  cursor: pointer;
+
+  +label {
+    cursor: pointer;
+  }
 
   &:checked + label {
     color: #dfe8ec;
@@ -140,6 +145,10 @@ input[type=checkbox] {
     border-radius: 3px;
     font-style: italic;
   }
+}
+
+label {
+  user-select: none;
 }
 
 // styles for large displays

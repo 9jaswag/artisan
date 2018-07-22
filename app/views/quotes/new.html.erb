@@ -1,9 +1,9 @@
 <div class="container-fluid mt-5">
   <% @services.each do |service| %>
     <div class="container">
-      <h5 class="mb-3"><%= service.split('-').map(&:capitalize).join(' ') %></h5>  
-      <form class="mb-3 <%= 'mb-5' if service == 'general-cleaning' %>" id="<%= service %>">
-        <% if service == 'general-cleaning' %>
+      <h5 class="mb-3"><%= service.split('_').map(&:capitalize).join(' ') %></h5>  
+      <form class="mb-3 <%= 'mb-5' if service == 'general_cleaning' %>" id="<%= service %>">
+        <% if service == 'general_cleaning' %>
           <div class="form-row">
             <div class="form-group col-12 col-md-4">
               <label class="form-check-label" for="people_per_job">How many workers are needed?</label>
@@ -20,7 +20,7 @@
           </div>
         <% end %>
 
-        <% if service == 'window-cleaning' %>
+        <% if service == 'window_cleaning' %>
           <div class="form-row mb-1">
             <div class="form-group col-12 col-md-4">
             <label class="form-check-label" for="mensuration">Any mensuration?</label>
@@ -71,7 +71,7 @@
           </div>
         <% end %>
 
-        <% if service == 'contract-service' %>
+        <% if service == 'contract_service' %>
           <div class="form-row">
             <div class="form-group col-12 col-md-6">
               <label class="form-check-label" for="people_per_job">Monthly visits</label>
@@ -94,13 +94,18 @@
       </form>
     </div>
   <% end %>
-  <div class="container mb-5 pl-0">
+  <div class="container mb-5 <%= 'pl-0' if params[:type] == 'custom' %>">
+      <button type="submit" class="btn btn-primary calculate mb-2" style="border: none">Calculate</button>
     <div class="total-container">
-      <button type="submit" class="btn btn-primary calculate mr-2" style="border: none">Calculate</button>
       <h4 class="d-inline-block">Total:</h4>
       <h1 class="d-inline-block"><span class="total">0</span></h1>
     </div>
-    <button type="submit" class="btn btn-primary mr-1 save-btn d-none" style="border: none">Save</button>
+    <div class="submit-container mt-3 d-none">
+      <label class="form-check-label" for="client_name">Client name</label>
+      <input type="text" min="0" id="client_name" class="form-control form-control-sm" />
+      <small class="text-danger d-block name-error invisible">Please enter a name for this client</small>
+      <button type="submit" class="btn btn-primary mr-1 mt-3 save-btn" style="border: none">Save</button>
+    </div>
     <a href="/dashboard" class="btn btn-link pl-0" style="border: none">Back to dashboard</a>
   </div>
 </div>

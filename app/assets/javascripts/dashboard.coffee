@@ -4,6 +4,7 @@
 $(document).on 'turbolinks:load', ->
   sumTotal = document.querySelector('.total');
   calculate = document.querySelector('.calculate');
+  submitContainer = document.querySelector('.submit-container');
   saveButton = document.querySelector('.save-btn');
 
   currencyFormat = (number) ->
@@ -26,9 +27,9 @@ $(document).on 'turbolinks:load', ->
   
   showSaveButton = (total) ->
     if total > 0
-      saveButton.classList.remove 'd-none'
+      submitContainer.classList.remove 'd-none'
     else
-      saveButton.classList.add 'd-none'
+      submitContainer.classList.add 'd-none'
     return
 
 
@@ -72,7 +73,21 @@ $(document).on 'turbolinks:load', ->
     return
 
   saveQuote = ->
-    data = {}
+    client_name= document.querySelector('#client_name').value
+    if client_name.length < 1
+      document.querySelector('.name-error').classList.remove('invisible')
+      return
+
+    # recalculating the totall just in case changes were made and not recalculated
+    if document.location.pathname.endsWith('custom')
+      calculateCustomQuote()
+    if document.location.pathname.endsWith('contract')
+      calculateContractQuote()
+
+    data = {
+      total: document.querySelector('.total').innerHTML
+      client_name: client_name
+    }
     forms = document.querySelectorAll('form');
     forms.forEach (form) ->
       data[form.id] = {}
@@ -83,7 +98,18 @@ $(document).on 'turbolinks:load', ->
         if input.type == 'number'
           data[form.id][input.id] = input.value
       return
-    console.log data
+
+    token = $('meta[name="csrf-token"]').attr('content')
+    $.ajax
+      url: '/quotes/create'
+      type: 'post'
+      beforeSend: (xhr) ->
+        xhr.setRequestHeader 'X-CSRF-Token', token
+        return
+      data: { data }
+      success: (response) ->
+        return
+    return
 
   if document.location.pathname.endsWith('custom')
     calculate.onclick = ->
