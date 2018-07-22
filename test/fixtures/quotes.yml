@@ -1,11 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  type: 
-  client: one
-  task: one
+  data: 
 
 two:
-  type: 
-  client: two
-  task: two
+  data: 
