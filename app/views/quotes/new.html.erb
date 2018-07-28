@@ -1,7 +1,7 @@
 <div class="container-fluid mt-5">
   <% @services.each do |service| %>
     <div class="container">
-      <h5 class="mb-3"><%= service.split('_').map(&:capitalize).join(' ') %></h5>  
+      <h5 class="mb-3"><%= make_word(service) %></h5>  
       <form class="mb-3 <%= 'mb-5' if service == 'general_cleaning' %>" id="<%= service %>">
         <% if service == 'general_cleaning' %>
           <div class="form-row">

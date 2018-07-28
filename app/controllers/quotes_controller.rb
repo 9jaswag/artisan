@@ -13,6 +13,13 @@ class QuotesController < ApplicationController
     redirect_to dashboard_path
   end
 
+  def show
+    @quote = Quote.find(params[:id])
+    # rescue_from ActiveRecord::RecordNotFound do |e|
+    #   redirect_to dashboard_path
+    # end
+  end
+
   private
     def check_quote_type
       redirect_to dashboard_path if params[:type] != 'custom' and params[:type] != 'contract'

@@ -57,3 +57,4 @@ gem 'jquery-rails'
 gem 'devise'
 # Pry for debugging
 gem "pry"
+gem 'will_paginate', '~> 3.1.0'

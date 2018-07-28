@@ -1,0 +1,35 @@
+<div class="container-fluid mt-5">
+  <div class="container mt-4">
+    <% if @quote %>
+      <h4>Cleaning quote for <%= @quote.data['client_name'] %></h4>
+      <div class="row">
+        <div class="col-12">
+          <h6 class="mt-3">Created on <%= @quote.created_at.strftime("%B %e, %Y at %I:%M %p") %></h6>
+        </div>
+        <% @quote.data.each_key do |item| %>
+          <% if item != 'client_name' and item != 'total' %>
+            <div class="col-12 col-sm-6 mb-3">
+              <div class="card text-white bg-secondary">
+                <div class="card-header">
+                  <%= make_word(item) %>
+                </div>
+                <ul class="list-group list-group-flush text-dark">
+                  <% @quote.data[item].each_key do |service| %>
+                    <li class="list-group-item"><%= make_word(service) %> <span class="badge badge-secondary"><%= add_sign(@quote.data[item], service) %></span> </li>
+                  <% end %>
+                </ul>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+      <h4 class="pt-5">Total: <%= @quote.data['total'] %></h4>
+      <%= link_to 'Back to Dashboard', dashboard_path, class: "card-link text-center d-block my-5" %>
+    <% else %>
+      <div class="card p-5">
+        <h4 class="text-center">Quote does not exist</h4>
+        <%= link_to 'Back to Dashboard', dashboard_path, class: "card-link text-center d-block mt-5" %>
+      </div>
+    <% end %>
+  </div>
+</div>
